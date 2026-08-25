@@ -18,7 +18,7 @@ export default function VenueView({ onNavigate }: VenueViewProps) {
     {
       name: "Waterstone Resort & Marina Boca Raton",
       dist: "10 km to venue",
-      image: "/assets/images (3).jpeg",
+      image: "/assets/waterstone-resort.jpeg",
       link: "https://www.hilton.com/en/hotels/bctbuqq-waterstone-resort-and-marina-boca-raton/?WT.mc_id=zLADA0AA1QQ2PSH3GGL4AMPHTBRD_Oct5GNPLTPMWBRNLAB6BCTBUQQ7EN8i142435__z22150162559z__&gclsrc=aw.ds&&utm_campaign=%7Bcampaign%7D&utm_adgroup=%7Badgroup%7D&utm_keyword=waterstone%20resort%20%26%20marina%20boca%20raton%20curio%20collection%20by%20hilton&gad_source=1&gad_campaignid=22150162559&gbraid=0AAAAA-Q0XEbzEk5RoeOwx95koEJq-JLh_&gclid=EAIaIQobChMIqrPw7f-nlgMVuIDCCB10DwkMEAAYASAAEgJBevD_BwE",
     },
     {

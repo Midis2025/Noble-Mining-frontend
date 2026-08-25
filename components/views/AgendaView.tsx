@@ -11,9 +11,9 @@ export default function AgendaView({ onNavigate }: AgendaViewProps) {
   const [agPage, setAgPage] = useState(0);
   const [agZoom, setAgZoom] = useState(100);
 
-  const pages = ["/assets/agenda-page-1.webp"];
-  const pdfFileUrl = "/assets/BOCA%20-%20AGENDA.pdf";
-  const pdfFileName = "BOCA - AGENDA.pdf";
+  const pages = ["/assets/boca-agenda-page-1.png"];
+  const pdfFileUrl = "/assets/BOCA%20-%20AGENDA%20(1).pdf";
+  const pdfFileName = "BOCA - AGENDA (1).pdf";
 
   const handleDownload = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
