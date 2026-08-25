@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 160" width="530" height="160" fill="none">
+  <!-- Circle Icon Emblem -->
+  <g transform="translate(8, 4)">
+    <circle cx="56" cy="56" r="54" fill="#FFFFFF"/>
+    <!-- Icon Inner Mark Cutouts -->
+    <path d="M 44,90 V 55 C 44,45 37,40 26,40 H 22 C 19,40 18,42 18,45 V 47 C 18,50 19,51 22,51 H 26 C 32,51 34,54 34,59 V 90 Z" fill="#000000"/>
+    <path d="M 68,90 V 59 C 68,54 70,51 76,51 H 80 C 83,51 84,50 84,47 V 45 C 84,42 83,40 80,40 H 76 C 65,40 58,45 58,55 V 90 Z" fill="#000000"/>
+    <circle cx="80" cy="63" r="6.5" fill="#000000"/>
+  </g>
+
+  <!-- Noble Typography & Subhead -->
+  <g fill="#FFFFFF" font-family="'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+    <!-- Wordmark 'Noble' -->
+    <text x="140" y="98" font-size="108" font-weight="300" letter-spacing="-1.5">Noble</text>
+    <!-- TM symbol at bottom right of 'e' -->
+    <text x="494" y="98" font-size="15" font-weight="700" letter-spacing="0.5">TM</text>
+    <!-- Sub-line 'NOBLE CAPITAL MARKETS' -->
+    <text x="8" y="148" font-size="28.5" font-weight="600" letter-spacing="4.8">NOBLE CAPITAL MARKETS</text>
+  </g>
+</svg>
