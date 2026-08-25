@@ -127,7 +127,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
         <div className="wrap hero-inner">
           <div className="hero-badge">
             <span className="pulse-dot"></span>
-            <span>TIER 1 MINING INVESTMENT&nbsp;EVENT</span>
+            <span>THE Nexus for Resourceful Investors</span>
           </div>
 
           <h1 id="heroTitle">
