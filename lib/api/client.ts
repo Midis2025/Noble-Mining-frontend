@@ -19,6 +19,19 @@ export interface StrapiResponse<T> {
   meta?: Record<string, unknown>;
 }
 
+/** Shape of a Strapi v5 collection REST response. */
+export interface StrapiCollectionResponse<T> {
+  data: (T & { id: number; documentId: string })[];
+  meta?: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 /** Internal error type — never surfaced verbatim to the user. */
 export class StrapiRequestError extends Error {
   readonly status: number;
@@ -109,3 +122,101 @@ export async function strapiPost<T>(
 
   throw new StrapiRequestError("Strapi rejected every field in the payload", 400, null);
 }
+
+/**
+ * GET collection or single resource from a Strapi endpoint.
+ *
+ * @param path Endpoint path, e.g. `/api/agendas?populate=*`
+ */
+export async function strapiGet<T>(
+  path: string,
+): Promise<StrapiCollectionResponse<T>> {
+  const url = `${STRAPI_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  let res: Response;
+
+  try {
+    res = await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 60 },
+    });
+  } catch (cause) {
+    if (isDev) console.error(`[strapi] network/CORS failure on GET ${url}`, cause);
+    throw new StrapiRequestError("Network request failed", 0, cause);
+  }
+
+  const raw = await res.text();
+  let parsed: unknown = null;
+  try {
+    parsed = raw ? JSON.parse(raw) : null;
+  } catch {
+    parsed = raw;
+  }
+
+  if (res.ok) {
+    return parsed as StrapiCollectionResponse<T>;
+  }
+
+  if (isDev) console.error(`[strapi] GET ${url} failed (${res.status})`, parsed);
+  throw new StrapiRequestError(`Strapi responded with ${res.status}`, res.status, parsed);
+}
+
+/** Canonical Strapi value for the Noble Mining Investment Conference website across all entities. */
+export const NOBLE_PUBLISH_TO = "Noble Mining Conference";
+
+/**
+ * Generic reusable filter enforcing website source isolation for any Strapi record with a `publishTo` property.
+ *
+ * Used across Agenda, Participating Companies, Speakers, etc.
+ */
+export function filterByPublishTo<T extends { publishTo?: string | null }>(
+  items: T[],
+  targetPublishTo: string = NOBLE_PUBLISH_TO
+): T[] {
+  if (!Array.isArray(items)) return [];
+  return items.filter((item) => item.publishTo === targetPublishTo);
+}
+
+/**
+ * Fetches all pages for a Strapi collection endpoint using dynamic pagination metadata.
+ */
+export async function fetchAllStrapiPages<T>(
+  endpoint: string,
+  baseParams: Record<string, string> = {},
+  pageSize: number = 25
+): Promise<(T & { id: number; documentId: string })[]> {
+  const params = new URLSearchParams(baseParams);
+  params.set("pagination[page]", "1");
+  params.set("pagination[pageSize]", String(pageSize));
+
+  const firstPath = `${endpoint}?${params.toString()}`;
+  const firstResponse = await strapiGet<T>(firstPath);
+
+  const allItems: (T & { id: number; documentId: string })[] = [...(firstResponse.data || [])];
+  const pageCount = firstResponse.meta?.pagination?.pageCount ?? 1;
+
+  if (pageCount > 1) {
+    const remainingPages = Array.from({ length: pageCount - 1 }, (_, i) => i + 2);
+    const remainingResults = await Promise.all(
+      remainingPages.map(async (page) => {
+        const pageParams = new URLSearchParams(baseParams);
+        pageParams.set("pagination[page]", String(page));
+        pageParams.set("pagination[pageSize]", String(pageSize));
+        try {
+          const res = await strapiGet<T>(`${endpoint}?${pageParams.toString()}`);
+          return res.data || [];
+        } catch (err) {
+          if (isDev) console.error(`[strapi] Failed to fetch page ${page} of ${endpoint}:`, err);
+          return [];
+        }
+      })
+    );
+
+    for (const pageItems of remainingResults) {
+      allItems.push(...pageItems);
+    }
+  }
+
+  return allItems;
+}
+
