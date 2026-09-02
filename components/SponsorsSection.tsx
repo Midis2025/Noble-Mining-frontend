@@ -111,7 +111,7 @@ export default function SponsorsSection({
               margin: 0,
             }}
           >
-            Sponsors 2027
+            Sponsors
           </h2>
           <p
             style={{

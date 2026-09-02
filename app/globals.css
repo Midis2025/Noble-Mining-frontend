@@ -1823,6 +1823,14 @@ footer.site {
   stroke: var(--teal-hi);
 }
 
+.gala-section .vfeat {
+  align-items: flex-start;
+}
+
+.gala-section .vfeat .vi {
+  margin-top: 2px;
+}
+
 .vgrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
