@@ -794,8 +794,8 @@ export default function CompaniesView({ onNavigate }: CompaniesViewProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{
-                                  background: "#a30014",
-                                  color: "#ffffff",
+                                  background: "#2fbf9c",
+                                  color: "#071a24",
                                   borderRadius: "8px",
                                   padding: "8px 16px",
                                   fontSize: "11.5px",
@@ -808,10 +808,10 @@ export default function CompaniesView({ onNavigate }: CompaniesViewProps) {
                                   whiteSpace: "nowrap",
                                 }}
                                 onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = "#7f000f";
+                                  e.currentTarget.style.backgroundColor = "#1e8f77";
                                 }}
                                 onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor = "#a30014";
+                                  e.currentTarget.style.backgroundColor = "#2fbf9c";
                                 }}
                               >
                                 Visit Website
@@ -1163,8 +1163,8 @@ export default function CompaniesView({ onNavigate }: CompaniesViewProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{
-                                  background: "#a30014",
-                                  color: "#ffffff",
+                                  background: "#2fbf9c",
+                                  color: "#071a24",
                                   borderRadius: "8px",
                                   padding: "8px 16px",
                                   fontSize: "11.5px",
@@ -1177,10 +1177,10 @@ export default function CompaniesView({ onNavigate }: CompaniesViewProps) {
                                   whiteSpace: "nowrap",
                                 }}
                                 onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = "#7f000f";
+                                  e.currentTarget.style.backgroundColor = "#1e8f77";
                                 }}
                                 onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor = "#a30014";
+                                  e.currentTarget.style.backgroundColor = "#2fbf9c";
                                 }}
                               >
                                 Visit Website

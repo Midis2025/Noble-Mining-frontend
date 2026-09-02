@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import GalaSection from "@/components/GalaSection";
 
 interface VenueViewProps {
   onNavigate: (view: string) => void;
@@ -124,7 +125,14 @@ export default function VenueView({ onNavigate }: VenueViewProps) {
               </span>
               <div>
                 <b>GALA NETWORKING EVENT – FEB 17</b>
-                <p>To Be Announced</p>
+                <p>
+                  The Addison
+                  <small>
+                    2 E. Camino Real,
+                    <br />
+                    Boca Raton, Florida
+                  </small>
+                </p>
               </div>
             </div>
           </div>
@@ -220,7 +228,8 @@ export default function VenueView({ onNavigate }: VenueViewProps) {
         </div>
       </section>
 
-    
+      {/* GALA NETWORKING EVENT SECTION */}
+      <GalaSection onNavigate={onNavigate} />
 
       {/* RECOMMENDED HOTELS */}
       <section className="hotels">

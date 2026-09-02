@@ -406,7 +406,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               <p>
                 February 17–18, 2027
                 <br />
-                Gala Networking Event – To Be Announced
+                Gala Networking Event – February 17, 2027
               </p>
             </div>
           </div>

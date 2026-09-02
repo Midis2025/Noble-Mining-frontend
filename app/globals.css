@@ -1847,9 +1847,9 @@ footer.site {
   object-fit: cover;
 }
 
-.gala-v {
+/* ================= GALA NETWORKING EVENT SECTION ================= */
+.gala-section {
   background: var(--bg);
-  padding: 0 0 70px;
 }
 
 .gala-card {
