@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import PartnerMarquee from "@/components/PartnerMarquee";
 
 interface AboutViewProps {
   onNavigate: (view: string) => void;
@@ -69,8 +68,6 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
           </div>
         </div>
       </section>
-
-      <PartnerMarquee />
 
       {/* COLLABORATION */}
       <section className="collab">

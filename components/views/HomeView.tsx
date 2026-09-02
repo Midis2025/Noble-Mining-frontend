@@ -1,7 +1,5 @@
 "use client";
 
-import PartnerMarquee from "@/components/PartnerMarquee";
-
 interface HomeViewProps {
   onNavigate: (view: string) => void;
 }
@@ -222,10 +220,6 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
           </div>
         </div>
       </section>
-
-      <PartnerMarquee />
-
-
 
       {/* ================= ABOUT THE CONFERENCE ================= */}
       <section className="aconf" id="aboutconf">

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import PartnerMarquee from "@/components/PartnerMarquee";
+import React, { useState, useEffect } from "react";
 import {
   REGISTRATION_ERROR_MESSAGE,
   submitNobleCompanyRegistration,
@@ -152,8 +151,6 @@ export default function RegisterView({
             </div>
           </div>
         </section>
-
-        <PartnerMarquee />
 
         {/* TRACK SELECTION CARDS */}
         <section className="reg-tracks">
@@ -713,8 +710,6 @@ export default function RegisterView({
           </div>
         </div>
       </section>
-
-      <PartnerMarquee />
 
       {/* IMPORTANT REGISTRATION NOTICE */}
       <section className="reg-notice-sec">

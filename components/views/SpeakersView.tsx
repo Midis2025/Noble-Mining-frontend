@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import PartnerMarquee from "@/components/PartnerMarquee";
 import {
   fetchNobleSpeakers,
   applySpeakerFilters,
@@ -117,8 +116,6 @@ export default function SpeakersView({ onNavigate }: SpeakersViewProps) {
           </div>
         </div>
       </section>
-
-      <PartnerMarquee />
 
       {/* LOADING STATE */}
       {loading && (

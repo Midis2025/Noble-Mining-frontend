@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import PartnerMarquee from "@/components/PartnerMarquee";
 import {
   fetchAgendas,
   filterNobleAgendas,
@@ -184,8 +183,6 @@ export default function AgendaView({ onNavigate }: AgendaViewProps) {
           </div>
         </div>
       </section>
-
-      <PartnerMarquee />
 
       {/* AGENDA SECTION */}
       <section className="ag-pdf" id="agPdf">

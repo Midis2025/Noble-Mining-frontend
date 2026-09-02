@@ -72,26 +72,43 @@ export interface CompanyFilterOptions {
  */
 export async function fetchNobleCompanies(): Promise<ParticipatingCompany[]> {
   const baseParams: Record<string, string> = {
-    "filters[publishTo][$eq]": NOBLE_COMPANY_PUBLISH_TO,
     populate: "*",
+    "sort[0]": "companyName:asc",
   };
 
   const allCompanies = await fetchAllStrapiPages<ParticipatingCompany>(
     COMPANIES_ENDPOINT,
     baseParams,
-    25
+    100
   );
 
-  // Safety filter: ensure only Noble records survived even if server filter changes
-  const nobleCompanies = filterByPublishTo(allCompanies, NOBLE_COMPANY_PUBLISH_TO);
+  // If there are records specifically marked publishTo === Noble, prefer those; otherwise include all valid companies
+  const nobleSpecific = filterByPublishTo(allCompanies, NOBLE_COMPANY_PUBLISH_TO);
+  const targetDataset = nobleSpecific.length > 0 ? nobleSpecific : allCompanies;
+
+  // Filter out any test/empty entries
+  const validCompanies = targetDataset.filter(
+    (c) =>
+      c.companyName &&
+      !c.companyName.toLowerCase().startsWith("test isolation") &&
+      c.companyName.trim().length > 0
+  );
+
+  // Sort alphabetically by companyName
+  validCompanies.sort((a, b) =>
+    a.companyName.localeCompare(b.companyName, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    })
+  );
 
   if (isDev) {
     console.log(
-      `[companies] ${nobleCompanies.length} Noble companies after safety filter (${allCompanies.length} total fetched)`
+      `[companies] ${validCompanies.length} valid companies loaded (${allCompanies.length} total fetched)`
     );
   }
 
-  return nobleCompanies;
+  return validCompanies;
 }
 
 /**

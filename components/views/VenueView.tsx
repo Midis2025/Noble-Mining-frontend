@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import PartnerMarquee from "@/components/PartnerMarquee";
 
 interface VenueViewProps {
   onNavigate: (view: string) => void;
@@ -63,8 +62,6 @@ export default function VenueView({ onNavigate }: VenueViewProps) {
           </p>
         </div>
       </section>
-
-      <PartnerMarquee />
 
       {/* FACT CARD */}
       <section className="vn-facts">

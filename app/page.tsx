@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
-import PartnerMarquee from "@/components/PartnerMarquee";
 import Footer from "@/components/Footer";
 import HomeView from "@/components/views/HomeView";
 import AboutView from "@/components/views/AboutView";
