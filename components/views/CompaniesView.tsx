@@ -90,14 +90,19 @@ export default function CompaniesView({ onNavigate }: CompaniesViewProps) {
 
   // Filtered partners
   const filteredPartners = useMemo(() => {
-    if (!partnerSearchQuery.trim()) return partners;
-    const q = partnerSearchQuery.toLowerCase().trim();
-    return partners.filter(
-      (p) =>
-        p.name?.toLowerCase().includes(q) ||
-        p.Type?.toLowerCase().includes(q) ||
-        p.tier?.toLowerCase().includes(q) ||
-        p.Year?.toLowerCase().includes(q)
+    let result = partners;
+    if (partnerSearchQuery.trim()) {
+      const q = partnerSearchQuery.toLowerCase().trim();
+      result = partners.filter(
+        (p) =>
+          p.name?.toLowerCase().includes(q) ||
+          p.Type?.toLowerCase().includes(q) ||
+          p.tier?.toLowerCase().includes(q) ||
+          p.Year?.toLowerCase().includes(q)
+      );
+    }
+    return [...result].sort((a, b) =>
+      (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
     );
   }, [partners, partnerSearchQuery]);
 

@@ -57,7 +57,9 @@ export async function fetchNobleMediaPartners(): Promise<MediaPartner[]> {
       baseParams,
       100
     );
-    return partners;
+    return partners.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
+    );
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.error("[partners] Failed to fetch media partners:", err);
