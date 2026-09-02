@@ -1,10 +1,38 @@
 "use client";
 
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  fetchNobleMediaPartners,
+  type MediaPartner,
+} from "@/lib/api/partners";
+import SponsorsSection from "@/components/SponsorsSection";
+
 interface HomeViewProps {
   onNavigate: (view: string) => void;
 }
 
 export default function HomeView({ onNavigate }: HomeViewProps) {
+  const [partners, setPartners] = useState<MediaPartner[]>([]);
+  const [loadingPartners, setLoadingPartners] = useState<boolean>(true);
+
+  const loadPartners = useCallback(async () => {
+    setLoadingPartners(true);
+    try {
+      const allPartners = await fetchNobleMediaPartners();
+      setPartners(allPartners);
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[HomeView] Failed to fetch sponsors:", err);
+      }
+    } finally {
+      setLoadingPartners(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadPartners();
+  }, [loadPartners]);
+
   const handleNavClick = (view: string, e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(view);
@@ -342,49 +370,8 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
         </div>
       </section>
 
-      {/* ================= COMING SOON ================= */}
-      <section className="coming" id="coming">
-        <img
-          className="coming-bg"
-          src="/assets/hero-art.webp"
-          alt="Boca Raton Waterfront"
-        />
-        <div className="coming-scrim"></div>
-        <div className="wrap coming-inner">
-          <span className="coming-ic">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M4 20h16M5 20V9h14v11M3 9l9-5 9 5M9 20v-6h6v6M12 12h.01" />
-            </svg>
-          </span>
-          <div className="coming-copy">
-            <div className="eyebrow">PARTICIPATING COMPANIES &amp;&nbsp;SPONSORS</div>
-            <h2>COMING&nbsp;SOON</h2>
-            <p>Participating companies and sponsors will be announced soon. Stay&nbsp;tuned!</p>
-            <button
-              className="btn-ghost"
-              type="button"
-              onClick={() => onNavigate("register")}
-            >
-              REGISTER TO STAY&nbsp;UPDATED{" "}
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* ================= SPONSORS ================= */}
+      <SponsorsSection id="sponsors" partners={partners} loading={loadingPartners} />
 
       {/* ================= INFO BAR ================= */}
       <section className="infobar" id="infobar">
