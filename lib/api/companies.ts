@@ -23,6 +23,34 @@ export const NOBLE_COMPANY_PUBLISH_TO = NOBLE_PUBLISH_TO;
 
 const isDev = process.env.NODE_ENV !== "production";
 
+/**
+ * Hardcoded participating companies added from the frontend.
+ * These are merged with the API results and sorted alphabetically.
+ */
+const FRONTEND_COMPANIES: ParticipatingCompany[] = [
+  {
+    id: -1,
+    documentId: "frontend-kuya-silver",
+    companyName: "KUYA SILVER CORPORATION",
+    ticker: "TSX-V: KUYA; OTC: KUYAF",
+    type: "Explorer",
+    location: "CANADA, PERU",
+    commodities: ["Ag"],
+    industry: null,
+    website: "https://www.kuyasilver.com",
+    publishTo: null,
+    logo: {
+      id: -1,
+      name: "kuya-silver-logo.png",
+      url: "/assets/kuya-silver-logo.png",
+      mime: "image/png",
+      width: 264,
+      height: 264,
+      formats: null,
+    },
+  },
+];
+
 /** Media asset representation from Strapi v5 */
 export interface StrapiCompanyLogo {
   id: number;
@@ -94,6 +122,16 @@ export async function fetchNobleCompanies(): Promise<ParticipatingCompany[]> {
       c.companyName.trim().length > 0
   );
 
+  // Merge frontend-only companies (deduplicate by companyName)
+  const existingNames = new Set(
+    validCompanies.map((c) => c.companyName.toLowerCase().trim())
+  );
+  for (const fc of FRONTEND_COMPANIES) {
+    if (!existingNames.has(fc.companyName.toLowerCase().trim())) {
+      validCompanies.push(fc);
+    }
+  }
+
   // Sort alphabetically by companyName
   validCompanies.sort((a, b) =>
     a.companyName.localeCompare(b.companyName, undefined, {
@@ -104,7 +142,7 @@ export async function fetchNobleCompanies(): Promise<ParticipatingCompany[]> {
 
   if (isDev) {
     console.log(
-      `[companies] ${validCompanies.length} valid companies loaded (${allCompanies.length} total fetched)`
+      `[companies] ${validCompanies.length} valid companies loaded (${allCompanies.length} from API + ${FRONTEND_COMPANIES.length} frontend-only)`
     );
   }
 
