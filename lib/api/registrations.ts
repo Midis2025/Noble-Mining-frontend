@@ -118,6 +118,7 @@ export interface InvestorRegistrationInput {
   aum: string;
   investorType: string;
   notes: string;
+  referral?: string;
   updates: boolean;
 }
 
@@ -134,6 +135,7 @@ export function buildInvestorPayload(form: InvestorRegistrationInput) {
     assetsUnderManagement: toStrapiEnum(form.aum, AUM_TO_STRAPI, "assetsUnderManagement"),
     investorType: toStrapiEnum(form.investorType, INVESTOR_TYPE_TO_STRAPI, "investorType"),
     investmentFocus: text(form.notes),
+    referral: text(form.referral),
     newsletterOptIn: Boolean(form.updates),
     sourceWebsite: NOBLE_SOURCE_WEBSITE,
   });
@@ -161,6 +163,7 @@ export interface CompanyRegistrationInput {
   commodity: string;
   marketCap: string;
   overview: string;
+  referral?: string;
   updates: boolean;
 }
 
@@ -182,6 +185,7 @@ export function buildCompanyPayload(form: CompanyRegistrationInput) {
     ),
     marketCapRange: toStrapiEnum(form.marketCap, MARKET_CAP_TO_STRAPI, "marketCapRange"),
     companyOverviewPresentationGoals: text(form.overview),
+    referral: text(form.referral),
     newsletterOptIn: Boolean(form.updates),
     sourceWebsite: NOBLE_SOURCE_WEBSITE,
   });

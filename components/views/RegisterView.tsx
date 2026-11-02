@@ -25,6 +25,7 @@ const INVESTOR_FORM_DEFAULTS = {
   aum: "",
   investorType: "Institutional Investor",
   notes: "",
+  referral: "",
   updates: true,
 };
 
@@ -41,6 +42,7 @@ const COMPANY_FORM_DEFAULTS = {
   commodity: "",
   marketCap: "",
   overview: "",
+  referral: "",
   updates: true,
 };
 
@@ -494,6 +496,16 @@ export default function RegisterView({
                     ></textarea>
                   </div>
 
+                  <div className="field-group">
+                    <label>Who Referred You to Attend? / Referral</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Referring firm, partner, colleague, or group name"
+                      value={invForm.referral}
+                      onChange={(e) => setInvForm({ ...invForm, referral: e.target.value })}
+                    />
+                  </div>
+
                   <div className="check-field">
                     <label className="checkbox-label">
                       <input
@@ -677,6 +689,16 @@ export default function RegisterView({
                       value={compForm.overview}
                       onChange={(e) => setCompForm({ ...compForm, overview: e.target.value })}
                     ></textarea>
+                  </div>
+
+                  <div className="field-group">
+                    <label>Who Referred You to Attend? / Referral</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Referring firm, partner, colleague, or group name"
+                      value={compForm.referral}
+                      onChange={(e) => setCompForm({ ...compForm, referral: e.target.value })}
+                    />
                   </div>
 
                   <div className="check-field">
