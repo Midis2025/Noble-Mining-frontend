@@ -112,6 +112,7 @@ export interface InvestorRegistrationInput {
   lastName: string;
   title: string;
   city: string;
+  state?: string;
   country: string;
   email: string;
   phone: string;
@@ -129,6 +130,7 @@ export function buildInvestorPayload(form: InvestorRegistrationInput) {
     lastName: form.lastName.trim(),
     businessTitle: text(form.title),
     city: text(form.city),
+    state: text(form.state),
     country: text(form.country),
     email: form.email.trim(),
     phone: text(form.phone),
@@ -157,6 +159,7 @@ export interface CompanyRegistrationInput {
   lastName: string;
   title: string;
   city: string;
+  state?: string;
   country: string;
   email: string;
   phone: string;
@@ -175,6 +178,7 @@ export function buildCompanyPayload(form: CompanyRegistrationInput) {
     lastName: form.lastName.trim(),
     executiveTitle: text(form.title),
     city: text(form.city),
+    state: text(form.state),
     country: text(form.country),
     email: form.email.trim(),
     phone: text(form.phone),

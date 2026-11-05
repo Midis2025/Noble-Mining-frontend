@@ -19,6 +19,7 @@ const INVESTOR_FORM_DEFAULTS = {
   lastName: "",
   title: "",
   city: "",
+  state: "",
   country: "",
   email: "",
   phone: "",
@@ -36,6 +37,7 @@ const COMPANY_FORM_DEFAULTS = {
   lastName: "",
   title: "",
   city: "",
+  state: "",
   country: "",
   email: "",
   phone: "",
@@ -418,14 +420,24 @@ export default function RegisterView({
                       />
                     </div>
                     <div className="field-group">
-                      <label>Country</label>
+                      <label>State / Province</label>
                       <input
                         type="text"
-                        placeholder="e.g. Canada"
-                        value={invForm.country}
-                        onChange={(e) => setInvForm({ ...invForm, country: e.target.value })}
+                        placeholder="e.g. Ontario"
+                        value={invForm.state}
+                        onChange={(e) => setInvForm({ ...invForm, state: e.target.value })}
                       />
                     </div>
+                  </div>
+
+                  <div className="field-group">
+                    <label>Country</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Canada"
+                      value={invForm.country}
+                      onChange={(e) => setInvForm({ ...invForm, country: e.target.value })}
+                    />
                   </div>
 
                   <div className="field-row">
@@ -614,14 +626,24 @@ export default function RegisterView({
                       />
                     </div>
                     <div className="field-group">
-                      <label>Country</label>
+                      <label>State / Province</label>
                       <input
                         type="text"
-                        placeholder="e.g. Canada"
-                        value={compForm.country}
-                        onChange={(e) => setCompForm({ ...compForm, country: e.target.value })}
+                        placeholder="e.g. British Columbia"
+                        value={compForm.state}
+                        onChange={(e) => setCompForm({ ...compForm, state: e.target.value })}
                       />
                     </div>
+                  </div>
+
+                  <div className="field-group">
+                    <label>Country</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Canada"
+                      value={compForm.country}
+                      onChange={(e) => setCompForm({ ...compForm, country: e.target.value })}
+                    />
                   </div>
 
                   <div className="field-row">
